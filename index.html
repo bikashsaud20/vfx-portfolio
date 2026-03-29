@@ -62,7 +62,7 @@
 
         .typing-text { color: var(--main-color); font-weight: 600; }
 
-        /* Canvas Animation Styling (Right Side) */
+        /* Canvas Animation Styling */
         #vfx-container {
             width: 350px;
             height: 350px;
@@ -92,7 +92,7 @@
         .experience h2 span { color: var(--main-color); }
 
         .experience-container {
-            display: grid; grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
             gap: 2.5rem; padding: 0 2rem;
         }
 
@@ -106,11 +106,24 @@
 
         .contact { padding: 80px 8%; text-align: center; }
 
+        /* --- Responsive Design (For Phones) --- */
         @media (max-width: 1200px) {
-            #vfx-container { display: none; } /* ट्याबलेट वा सानो स्क्रिनमा एनिमेसन हट्छ */
+            #vfx-container { display: none; } 
             .home { justify-content: center; text-align: center; flex-direction: column; padding-top: 120px; }
             .home-content { padding-left: 0; }
             .home-content p { margin-left: auto; margin-right: auto; }
+        }
+
+        @media (max-width: 768px) {
+            header { padding: 1rem 4%; }
+            .logo { font-size: 1.8rem; }
+            nav { display: none; } /* मोबाइलमा मेनु अहिलेलाई लुकाइएको */
+            
+            .home-img { width: 280px; height: 280px; }
+            .home-content h1 { font-size: 2.8rem; }
+            
+            .experience h2 { font-size: 2.5rem; }
+            .contact-info { flex-direction: column; }
         }
     </style>
 </head>
@@ -128,7 +141,7 @@
 
     <section class="home" id="home">
         <div class="home-img" id="profileCard">
-            <img src="profile.jpg" onerror="this.src='profile.jpg.jpg'; this.onerror=null;" alt="Bikash Saud">
+            <img src="profile.jpg" alt="Bikash Saud">
         </div>
 
         <div class="home-content">
@@ -177,20 +190,20 @@
     <section class="contact" id="contact">
         <h2>Contact <span>Me</span></h2>
         <div class="contact-info" style="display: flex; justify-content: center; gap: 2rem; margin-top: 2rem;">
-            <div class="info-box" style="background: #111; padding: 2rem; border-radius: 1rem; border: 1px solid var(--main-color);">
-                <i class="fas fa-phone"></i>
+            <div class="info-box" style="background: #111; padding: 1.5rem; border-radius: 1rem; border: 1px solid var(--main-color); width: 100%; max-width: 300px;">
+                <i class="fas fa-phone" style="color: var(--main-color); margin-bottom: 10px;"></i>
                 <p>+91 9082254975</p>
             </div>
-            <div class="info-box" style="background: #111; padding: 2rem; border-radius: 1rem; border: 1px solid var(--main-color);">
-                <i class="fas fa-envelope"></i>
-                <p>saudbikash01bbb@gmail.com</p>
+            <div class="info-box" style="background: #111; padding: 1.5rem; border-radius: 1rem; border: 1px solid var(--main-color); width: 100%; max-width: 300px;">
+                <i class="fas fa-envelope" style="color: var(--main-color); margin-bottom: 10px;"></i>
+                <p style="font-size: 0.9rem;">saudbikash01bbb@gmail.com</p>
             </div>
         </div>
     </section>
 
     <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
     <script>
-        // १. Typing Animation
+        // Typing Animation
         var typed = new Typed(".typing-text", {
             strings: ["VFX Artist", "Compositor", "Video Editor", "Visual Thinker"],
             typeSpeed: 100,
@@ -198,21 +211,10 @@
             loop: true
         });
 
-        // २. Profile Picture Tilt Effect
-        const profileCard = document.getElementById('profileCard');
-        profileCard.addEventListener('mousemove', (e) => {
-            let x = (window.innerWidth / 2 - e.pageX) / 20;
-            let y = (window.innerHeight / 2 - e.pageY) / 20;
-            profileCard.style.transform = `rotateY(${x}deg) rotateX(${y}deg)`;
-        });
-        profileCard.addEventListener('mouseleave', () => {
-            profileCard.style.transform = 'rotateY(0deg) rotateX(0deg)';
-        });
-
-       // दायाँपट्टिको लागि विशेष VFX एनिमेसन (Rotating Orbit)
+        // VFX Animation (Orbit)
         const canvas = document.getElementById('vfx-canvas');
         const ctx = canvas.getContext('2d');
-        canvas.width = 700;
+        canvas.width = 350;
         canvas.height = 350;
 
         let particles = [];
